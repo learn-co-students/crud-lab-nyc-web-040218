@@ -3,10 +3,18 @@ import Review from './Review';
 
 class Reviews extends Component {
   render() {
+    const {store, restaurantId} = this.props
+    console.log("state is", store.getState());
+    const associatedReviews = store.getState().reviews.filter(review => review.restaurantId === restaurantId)
+    const reviews = associatedReviews.map((review, index) => {
+      return <Review store={store} key={index} review={review} />
+    })
     return (
+      <div>
       <ul>
-        Reviews
+        {reviews}
       </ul>
+      </div>
     );
   }
 };
